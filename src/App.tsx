@@ -1,23 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import Nav from './components/Nav';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
-function App() {
+const App = (): JSX.Element => {
+  const navElements = [
+    {name: 'Home', route: '/', active: false},
+    {name: 'Projects', route: '/projects', active: false},
+    {name: 'About', route: '/about', active: false}
+  ]
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Router>
+          <Nav elements={navElements} />
+          <br />
+          <Switch>
+            <Route path="/about">
+              <div>about</div>
+            </Route>
+            <Route path="/projects">
+              <div>projects</div>
+            </Route>
+            <Route path="/">
+              <div>home</div>
+            </Route>
+          </Switch>
+        </Router>
       </header>
     </div>
   );
